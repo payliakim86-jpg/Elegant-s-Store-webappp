@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <title>Адмін — Elegant's Store</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body data-page="admin">
+
+  <!-- ══ HEADER ══════════════════════════════════════════════ -->
+  <header class="hdr">
+    <div class="hdr-logo">Elegant's <span style="font-size:.7em;color:var(--t3);font-family:var(--ff-body);font-weight:400">Адмін</span></div>
+    <div class="hdr-actions">
+      <a href="index.html" class="cart-chip">← Магазин</a>
+    </div>
+  </header>
+
+  <!-- ══ ACCESS DENIED ════════════════════════════════════════ -->
+  <div id="denied" class="denied" style="display:none">
+    <div class="lock">🔐</div>
+    <h2>Доступ заборонено</h2>
+    <p>Ця панель доступна тільки для адміністраторів.</p>
+    <a href="login.html" class="btn btn-gold mt16">Увійти як адмін</a>
+  </div>
+
+  <!-- ══ ADMIN PANEL ══════════════════════════════════════════ -->
+  <div id="panel" style="display:none">
+
+    <!-- Stats -->
+    <div class="wrap" style="padding-top:12px">
+      <div id="statsWrap"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="atabs">
+      <button class="atab on"  data-tab="addProd"     onclick="AP.switchTab('addProd')">➕ Додати</button>
+      <button class="atab"     data-tab="prodList"    onclick="AP.switchTab('prodList')">📦 Товари</button>
+      <button class="atab"     data-tab="orders"      onclick="AP.switchTab('orders')">🛒 Замовлення</button>
+      <button class="atab"     data-tab="sysSett"     onclick="AP.switchTab('sysSett')">⚙️ Налаштування</button>
+      <button class="atab"     data-tab="logs"        onclick="AP.switchTab('logs')">📝 Логи</button>
+    </div>
+
+    <!-- ── TAB: ADD PRODUCT ─────────────────────────────────── -->
+    <div class="acontent on" id="tab-addProd">
+      <form id="addForm" novalidate>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Назва *</label>
+            <input type="text" id="prodName" placeholder="Classic Tee" required>
+          </div>
+          <div class="fgroup">
+            <label>Категорія *</label>
+            <input type="text" id="prodCat" placeholder="Футболки" list="catList" required>
+            <datalist id="catList">
+              <option value="Футболки">
+              <option value="Шорти">
+              <option value="Худі">
+              <option value="Ремені">
+              <option value="Кепки">
+              <option value="Кросівки">
+              <option value="Штани">
+              <option value="Куртки">
+            </datalist>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Ціна (₴) *</label>
+            <input type="number" id="prodPrice" placeholder="990" min="0" required>
+          </div>
+          <div class="fgroup">
+            <label>Стара ціна (₴)</label>
+            <input type="number" id="prodOldPrice" placeholder="1290" min="0">
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Кількість</label>
+            <input type="number" id="prodQty" placeholder="10" min="0" value="1">
+          </div>
+          <div class="fgroup">
+            <label>Емодзі</label>
+            <input type="text" id="prodEmoji" placeholder="👕" maxlength="4">
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Розміри</label>
+            <input type="text" id="prodSize" placeholder="S, M, L, XL">
+          </div>
+          <div class="fgroup">
+            <label>Бейдж</label>
+            <select id="prodBadge">
+              <option value="">Без бейджа</option>
+              <option value="Новинка">Новинка</option>
+              <option value="Sale">Sale</option>
+              <option value="Хіт">Хіт</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label>Опис</label>
+          <textarea id="prodDesc" rows="3" placeholder="Короткий опис товару…"></textarea>
+        </div>
+
+        <!-- Photo upload -->
+        <div class="fgroup">
+          <label>Фото (до 2 MB)</label>
+          <div class="upload" onclick="document.getElementById('prodPhoto').click()">
+            <div class="up-ic">📷</div>
+            <p>Натисніть для вибору фото</p>
+          </div>
+          <input type="file" id="prodPhoto" accept="image/*" style="display:none">
+          <input type="hidden" id="prodPhotoB64">
+          <div id="addPrev" class="img-prev"></div>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-full">➕ Додати товар</button>
+      </form>
+    </div>
+
+    <!-- ── TAB: PRODUCT LIST ─────────────────────────────────── -->
+    <div class="acontent" id="tab-prodList">
+      <div class="row-between mb12">
+        <h3 style="font-family:var(--ff-display)">Всі товари</h3>
+      </div>
+      <div id="prodList"></div>
+    </div>
+
+    <!-- ── TAB: ORDERS ──────────────────────────────────────── -->
+    <div class="acontent" id="tab-orders">
+      <div class="mb12"><h3 style="font-family:var(--ff-display)">Замовлення</h3></div>
+      <div id="ordersList"></div>
+    </div>
+
+    <!-- ── TAB: SYSTEM SETTINGS ─────────────────────────────── -->
+    <div class="acontent" id="tab-sysSett">
+      <div class="mb16"><h3 style="font-family:var(--ff-display)">Системні налаштування</h3></div>
+      <div id="sysSettingsForm"></div>
+    </div>
+
+    <!-- ── TAB: LOGS ─────────────────────────────────────────── -->
+    <div class="acontent" id="tab-logs">
+      <div class="row-between mb12">
+        <h3 style="font-family:var(--ff-display)">Журнал дій</h3>
+        <button class="btn btn-ghost btn-sm" onclick="AP.clearLogs()">🗑 Очистити</button>
+      </div>
+      <div id="logsWrap"></div>
+    </div>
+
+  </div><!-- /panel -->
+
+  <!-- ══ EDIT MODAL ═══════════════════════════════════════════ -->
+  <div class="overlay" id="editModal" onclick="if(event.target===this)AP.closeModal('editModal')">
+    <div class="modal">
+      <div class="modal-hdr">
+        <h3>✏️ Редагувати товар</h3>
+        <button class="modal-close" onclick="AP.closeModal('editModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editId">
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Назва *</label>
+            <input type="text" id="editName" required>
+          </div>
+          <div class="fgroup">
+            <label>Категорія *</label>
+            <input type="text" id="editCat" list="catList" required>
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Ціна *</label>
+            <input type="number" id="editPrice" min="0" required>
+          </div>
+          <div class="fgroup">
+            <label>Стара ціна</label>
+            <input type="number" id="editOldPrice" min="0">
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Кількість</label>
+            <input type="number" id="editQty" min="0">
+          </div>
+          <div class="fgroup">
+            <label>Емодзі</label>
+            <input type="text" id="editEmoji" maxlength="4">
+          </div>
+        </div>
+
+        <div class="frow">
+          <div class="fgroup">
+            <label>Розміри</label>
+            <input type="text" id="editSize">
+          </div>
+          <div class="fgroup">
+            <label>Бейдж</label>
+            <select id="editBadge">
+              <option value="">Без бейджа</option>
+              <option value="Новинка">Новинка</option>
+              <option value="Sale">Sale</option>
+              <option value="Хіт">Хіт</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label>Опис</label>
+          <textarea id="editDesc" rows="3"></textarea>
+        </div>
+
+        <div class="fgroup">
+          <label>Замінити фото</label>
+          <div class="upload" onclick="document.getElementById('editPhotoInput').click()">
+            <div class="up-ic">📷</div>
+            <p>Клацніть для завантаження нового фото</p>
+          </div>
+          <input type="file" id="editPhotoInput" accept="image/*" style="display:none">
+          <input type="hidden" id="editPhotoB64">
+          <div id="editPrev" class="img-prev mt8"></div>
+        </div>
+
+        <div class="row g8 mt16">
+          <button class="btn btn-ghost btn-full" onclick="AP.closeModal('editModal')">Скасувати</button>
+          <button class="btn btn-gold btn-full"  onclick="AP.saveEdit()">💾 Зберегти</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="elegant-telegram.js"></script>
+  <script src="app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,703 @@
+/* ================================================================
+   Elegant's Store — style.css
+   [ЗМІНА 4] Золотисто-чорна преміум кольорова гама
+   Mobile-first · Telegram WebApp
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables ───────────────────────────────────────────── */
+:root {
+  /* [ЗМІНА 4] Основний фон — глибокий чорний */
+  --bg:          #050505;
+  --bg2:         #0d0d0d;
+  --bg3:         #1a1a1a;
+  --bg4:         #222222;
+  --bg5:         #2a2a2a;
+  --border:      #2a2a2a;
+  --border2:     #383838;
+
+  /* [ЗМІНА 4] Золотий акцент — незмінний */
+  --gold:        #c8a96e;
+  --gold2:       #e2c98e;
+  --gold3:       #96773e;
+  --gold-glow:   rgba(200,169,110,.18);
+
+  --red:         #d9534f;
+  --green:       #4caf7d;
+  --amber:       #d4894a;
+
+  /* [ЗМІНА 4] Текст — світло-сірий/білий */
+  --t1:          #f4f0ea;
+  --t2:          #9e9a94;
+  --t3:          #5e5b56;
+
+  --r:           10px;
+  --r2:          16px;
+  --r3:          24px;
+  --nav:         62px;
+  --hdr:         52px;
+
+  --ff-display:  'Playfair Display', Georgia, 'Times New Roman', serif;
+  --ff-body:     'DM Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --ease:        cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--ff-body);
+  background:var(--bg);
+  color:var(--t1);
+  min-height:100vh;
+  padding-bottom:calc(var(--nav) + 12px);
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior:none;
+}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold2)}
+img{display:block;max-width:100%}
+button{cursor:pointer;font-family:var(--ff-body);border:none;background:none;outline:none;-webkit-tap-highlight-color:transparent}
+input,select,textarea{
+  font-family:var(--ff-body);font-size:.9rem;
+  /* [ЗМІНА 4] Темні поля з золотою рамкою при фокусі */
+  background:var(--bg4);border:1px solid var(--border);
+  color:var(--t1);border-radius:var(--r);
+  padding:10px 13px;width:100%;
+  transition:border-color .2s var(--ease);
+  -webkit-appearance:none;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+input::placeholder,textarea::placeholder{color:var(--t3)}
+select option{background:var(--bg3)}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── Typography ──────────────────────────────────────────────── */
+.display{font-family:var(--ff-display);letter-spacing:.02em}
+h1{font-family:var(--ff-display);font-size:1.9rem;font-weight:600}
+h2{font-family:var(--ff-display);font-size:1.4rem;font-weight:600}
+h3{font-family:var(--ff-display);font-size:1.1rem;font-weight:500}
+.overline{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.caption{font-size:.78rem;color:var(--t2)}
+
+/* ── Layout ──────────────────────────────────────────────────── */
+.wrap{max-width:480px;margin:0 auto;padding:0 14px}
+.page{padding-top:14px}
+.row{display:flex;align-items:center}
+.row-between{display:flex;align-items:center;justify-content:space-between}
+.col{display:flex;flex-direction:column}
+.g4{gap:4px}.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}
+.mt4{margin-top:4px}.mt8{margin-top:8px}.mt12{margin-top:12px}
+.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+.w100{width:100%}.tc{text-align:center}
+.gold{color:var(--gold)}.t2{color:var(--t2)}.t3{color:var(--t3)}
+.red{color:var(--red)}.green{color:var(--green)}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:10px 18px;border-radius:var(--r);
+  font-size:.88rem;font-weight:500;letter-spacing:.03em;
+  transition:all .2s var(--ease);white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:scale(.97)}
+
+/* [ЗМІНА 4] btn-gold — золотий фон, чорний текст */
+.btn-gold{
+  background:var(--gold);
+  color:#050505;
+  box-shadow:0 2px 12px rgba(200,169,110,.25);
+}
+.btn-gold:hover{background:var(--gold2);box-shadow:0 4px 18px rgba(200,169,110,.35)}
+
+/* [ЗМІНА 4] btn-ghost — прозорий фон, золота обводка і текст */
+.btn-ghost{
+  background:transparent;
+  color:var(--gold);
+  border:1px solid var(--gold);
+}
+.btn-ghost:hover{background:var(--gold-glow)}
+
+/* btn-outline — аліас для btn-ghost у деяких місцях */
+.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn-outline:hover{background:var(--gold-glow)}
+
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{background:#c0403c}
+
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#3d9467}
+
+.btn-sm{padding:7px 13px;font-size:.8rem}
+.btn-full{width:100%}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.hdr{
+  position:sticky;top:0;z-index:200;
+  height:var(--hdr);
+  /* [ЗМІНА 4] Темний хедер з золотою нижньою межею */
+  background:rgba(5,5,5,.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(200,169,110,.15);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14px;
+}
+.hdr-logo{
+  font-family:var(--ff-display);font-size:1.25rem;font-weight:700;
+  color:var(--gold);letter-spacing:.06em;line-height:1;
+}
+.hdr-logo sup{font-size:.6em;color:var(--t3);font-weight:400;font-family:var(--ff-body)}
+.hdr-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:var(--r);
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--t1);font-size:1rem;
+  transition:all .2s var(--ease);
+  position:relative;
+}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+.cart-chip{
+  display:flex;align-items:center;gap:6px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r);padding:7px 12px;
+  font-size:.85rem;color:var(--t1);
+  transition:all .2s var(--ease);
+  text-decoration:none;
+}
+.cart-chip:hover{border-color:var(--gold);color:var(--gold)}
+.cart-chip .cnt{
+  background:var(--gold);color:#050505;
+  border-radius:8px;padding:1px 6px;
+  font-size:.68rem;font-weight:700;min-width:18px;text-align:center;
+  display:none;
+}
+.cart-chip .cnt.show{display:inline}
+
+/* ── Bottom Nav ──────────────────────────────────────────────── */
+.nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  height:var(--nav);
+  /* [ЗМІНА 4] Темний nav з золотою верхньою межею */
+  background:rgba(10,10,10,.97);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-top:1px solid rgba(200,169,110,.12);
+  display:flex;max-width:480px;margin:0 auto;
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;color:var(--t3);font-size:.64rem;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;
+  transition:color .2s var(--ease);
+  position:relative;padding:8px 4px;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-item .ni{font-size:1.2rem;transition:transform .2s var(--ease)}
+.nav-item:hover,.nav-item.on{color:var(--gold)}
+.nav-item.on .ni{transform:scale(1.1)}
+.nav-item.on::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:24px;height:2px;background:var(--gold);border-radius:0 0 2px 2px;
+}
+
+/* ── Hero — [ЗМІНА 3+4] Логотип-банер у преміум стилі ──────── */
+.hero{
+  margin:14px 0 12px;
+  border-radius:var(--r2);overflow:hidden;position:relative;
+  /* [ЗМІНА 4] Темний градієнт з золотим блиском */
+  background:linear-gradient(145deg,#0a0800,#1a1400 50%,#0a0800);
+  border:1px solid rgba(200,169,110,.28);
+  padding:30px 20px 24px;min-height:160px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  box-shadow:0 4px 32px rgba(200,169,110,.08);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.18) 0%,transparent 60%),
+    radial-gradient(ellipse at 50% 100%,rgba(200,169,110,.07) 0%,transparent 50%);
+}
+/* [ЗМІНА 3] Стилі логотипу */
+.hero-logo{
+  font-family:var(--ff-display);
+  font-size:2rem;font-weight:700;
+  color:var(--gold);
+  letter-spacing:.18em;
+  line-height:1.15;
+  margin-bottom:8px;
+  text-shadow:0 2px 18px rgba(200,169,110,.35);
+  position:relative;
+}
+.hero-tagline{
+  font-size:.8rem;font-weight:400;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--t2);
+  margin-bottom:18px;
+  position:relative;
+}
+/* Залишаємо старі класи hero для cart.html / settings.html */
+.hero-dec{
+  position:absolute;right:16px;top:14px;
+  font-size:3.2rem;opacity:.45;
+  filter:drop-shadow(0 2px 12px rgba(200,169,110,.35));
+  pointer-events:none;
+}
+.hero-tag{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.hero h2{font-family:var(--ff-display);font-size:1.7rem;line-height:1.15;margin-bottom:8px}
+.hero p{color:var(--t2);font-size:.83rem;margin-bottom:14px}
+
+/* ── [ЗМІНА 5] Discount first order banner ───────────────────── */
+.discount-first-order{
+  margin-bottom:14px;
+  /* Золотистий градієнт на темному тлі */
+  background:linear-gradient(120deg,rgba(200,169,110,.12) 0%,rgba(200,169,110,.05) 60%,rgba(200,169,110,.1) 100%);
+  border:1px solid rgba(200,169,110,.35);
+  border-radius:var(--r2);
+  padding:14px 14px;
+  display:flex;align-items:center;gap:11px;
+  box-shadow:0 2px 16px rgba(200,169,110,.07);
+  position:relative;overflow:hidden;
+}
+/* Тонкий золотий акцент зліва */
+.discount-first-order::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:3px;
+  background:linear-gradient(to bottom,var(--gold2),var(--gold3));
+  border-radius:var(--r2) 0 0 var(--r2);
+}
+.dfo-icon{
+  font-size:1.65rem;flex-shrink:0;
+  filter:drop-shadow(0 1px 8px rgba(200,169,110,.4));
+}
+.dfo-text{flex:1;min-width:0}
+.dfo-title{
+  font-family:var(--ff-display);
+  font-size:.95rem;font-weight:600;
+  color:var(--gold);
+  margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.dfo-sub{font-size:.72rem;color:var(--t2)}
+.dfo-btn{
+  flex-shrink:0;
+  background:var(--gold);color:#050505;
+  border-radius:var(--r);padding:8px 13px;
+  font-size:.78rem;font-weight:700;
+  letter-spacing:.03em;
+  transition:all .2s var(--ease);
+  cursor:pointer;border:none;
+  white-space:nowrap;
+  box-shadow:0 2px 10px rgba(200,169,110,.3);
+}
+.dfo-btn:hover{background:var(--gold2);box-shadow:0 3px 14px rgba(200,169,110,.4)}
+.dfo-btn:active{transform:scale(.97)}
+
+/* ── Sale strip ──────────────────────────────────────────────── */
+.sale-strip{
+  margin-bottom:14px;
+  background:linear-gradient(90deg,rgba(200,169,110,.08),rgba(200,169,110,.04));
+  border:1px solid rgba(200,169,110,.22);
+  border-radius:var(--r);padding:13px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.sale-strip h3{font-family:var(--ff-display);color:var(--gold);font-size:1rem;margin-bottom:2px}
+.sale-strip p{font-size:.8rem;color:var(--t2)}
+.sale-badge{
+  background:var(--gold);color:#050505;border-radius:var(--r);
+  padding:7px 13px;font-size:.8rem;font-weight:700;flex-shrink:0;
+  letter-spacing:.03em;cursor:pointer;
+}
+
+/* ── Quick links ─────────────────────────────────────────────── */
+.ql-row{
+  display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;
+  scrollbar-width:none;margin-bottom:14px;
+}
+.ql-row::-webkit-scrollbar{display:none}
+.ql{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  /* [ЗМІНА 4] Темна картка */
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:20px;padding:7px 13px;
+  font-size:.78rem;color:var(--t2);
+  transition:all .2s var(--ease);white-space:nowrap;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.ql:hover{border-color:var(--gold3);color:var(--gold);background:var(--bg4)}
+.ql .qi{font-size:.95rem}
+
+/* ── Search / Filters ────────────────────────────────────────── */
+.search-wrap{position:relative;margin-bottom:10px}
+.search-wrap input{padding-left:36px}
+.search-icon{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:var(--t3);font-size:.95rem;pointer-events:none;
+}
+.chips{
+  display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;
+  scrollbar-width:none;margin-bottom:12px;
+}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex-shrink:0;padding:6px 13px;border-radius:20px;
+  font-size:.78rem;color:var(--t2);
+  background:var(--bg3);border:1px solid var(--border);
+  transition:all .2s var(--ease);white-space:nowrap;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.chip:hover{border-color:var(--gold3);color:var(--t1)}
+/* [ЗМІНА 4] Активний чіп — золотий фон, чорний текст */
+.chip.on{background:var(--gold);color:#050505;border-color:var(--gold);font-weight:600}
+.price-row{display:flex;gap:8px;align-items:center;margin-bottom:14px}
+.price-row input{text-align:center}
+.price-row .sep{color:var(--t3);flex-shrink:0;font-size:.9rem}
+
+/* ── Section header ──────────────────────────────────────────── */
+.sec-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
+.sec-hdr h2{font-size:1.3rem}
+.sec-hdr a{font-size:.78rem;color:var(--gold)}
+
+/* ── Product grid ────────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.card{
+  /* [ЗМІНА 4] Темно-сірі картки */
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.card:hover{border-color:var(--gold3);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.6)}
+.card-img{
+  aspect-ratio:1;background:var(--bg4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.2rem;position:relative;overflow:hidden;
+}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-bdg{
+  position:absolute;top:7px;left:7px;
+  background:var(--gold);color:#050505;
+  font-size:.6rem;font-weight:700;letter-spacing:.07em;
+  padding:3px 7px;border-radius:5px;text-transform:uppercase;
+}
+.card-bdg.sale{background:var(--red);color:#fff}
+.card-bdg.hit{background:#4466dd;color:#fff}
+.card-body{padding:11px;flex:1;display:flex;flex-direction:column}
+.card-cat{font-size:.64rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
+.card-name{
+  font-family:var(--ff-display);font-size:.95rem;font-weight:600;
+  color:var(--t1);line-height:1.22;margin-bottom:7px;
+}
+.card-meta{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.card-price{font-size:1rem;font-weight:600;color:var(--gold)}
+.card-old{font-size:.75rem;color:var(--t3);text-decoration:line-through}
+.card-size{
+  font-size:.65rem;color:var(--t2);background:var(--bg5);
+  border-radius:4px;padding:2px 5px;
+}
+.card-btns{display:flex;gap:5px;margin-top:auto}
+.card-btns .btn{flex:1;font-size:.74rem;padding:8px 5px}
+
+/* ── Empty state ─────────────────────────────────────────────── */
+.empty{text-align:center;padding:52px 16px;color:var(--t3)}
+.empty .ei{font-size:2.8rem;margin-bottom:11px;opacity:.45}
+.empty h3{font-family:var(--ff-display);color:var(--t2);font-size:1.15rem;margin-bottom:5px}
+.empty p{font-size:.85rem}
+
+/* ── Toast ───────────────────────────────────────────────────── */
+.toast{
+  position:fixed;bottom:calc(var(--nav) + 10px);left:50%;
+  transform:translateX(-50%) translateY(14px);
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);padding:11px 18px;
+  font-size:.85rem;color:var(--t1);
+  box-shadow:0 4px 20px rgba(0,0,0,.6);
+  z-index:999;opacity:0;pointer-events:none;
+  transition:all .28s var(--ease);white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--green)}
+.toast.err{border-color:var(--red)}
+
+/* ── Cart page ───────────────────────────────────────────────── */
+.cart-item{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);padding:13px;
+  display:flex;gap:11px;margin-bottom:9px;
+  transition:border-color .2s;
+}
+.ci-img{
+  width:68px;height:68px;flex-shrink:0;
+  background:var(--bg4);border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;overflow:hidden;
+}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex:1;min-width:0}
+.ci-name{
+  font-family:var(--ff-display);font-size:.95rem;font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;
+}
+.ci-cat{font-size:.7rem;color:var(--t3);margin-bottom:7px}
+.ci-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty-btn{
+  width:28px;height:28px;border-radius:7px;
+  background:var(--bg4);border:1px solid var(--border);
+  color:var(--t1);font-size:1rem;font-weight:500;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;cursor:pointer;
+}
+.qty-btn:hover{border-color:var(--gold);color:var(--gold)}
+.qty-val{font-size:.88rem;font-weight:500;min-width:18px;text-align:center}
+.ci-price{font-size:.95rem;font-weight:600;color:var(--gold)}
+.ci-del{color:var(--t3);font-size:1rem;padding:4px;border-radius:5px;transition:color .18s;cursor:pointer}
+.ci-del:hover{color:var(--red)}
+
+.summary{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);padding:15px;margin-top:14px;
+}
+.sum-row{
+  display:flex;justify-content:space-between;
+  font-size:.88rem;color:var(--t2);padding:5px 0;
+}
+.sum-row.total{
+  font-size:1.05rem;font-weight:600;color:var(--t1);
+  border-top:1px solid var(--border);margin-top:5px;padding-top:11px;
+}
+.sum-row.total .sum-val{color:var(--gold);font-family:var(--ff-display);font-size:1.25rem}
+.checkout-note{font-size:.76rem;color:var(--t3);text-align:center;margin:10px 0 8px}
+
+/* ── Settings page ───────────────────────────────────────────── */
+.scard{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);margin-bottom:13px;overflow:hidden;
+}
+.scard-hdr{
+  padding:13px 15px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:9px;
+}
+.scard-hdr h3{font-size:.95rem}
+.sfield{padding:11px 15px;border-bottom:1px solid var(--border)}
+.sfield:last-child{border-bottom:none}
+.sfield label{display:block;font-size:.66rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.sfield .ro{font-size:.9rem;color:var(--t1);padding:6px 0}
+
+/* ── Admin panel ─────────────────────────────────────────────── */
+.atabs{
+  display:flex;overflow-x:auto;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:0 6px;gap:2px;scrollbar-width:none;
+  position:sticky;top:var(--hdr);z-index:150;
+}
+.atabs::-webkit-scrollbar{display:none}
+.atab{
+  flex-shrink:0;padding:11px 13px;
+  font-size:.76rem;font-weight:500;letter-spacing:.04em;color:var(--t3);
+  border-bottom:2px solid transparent;transition:all .2s;
+  white-space:nowrap;cursor:pointer;background:none;
+}
+.atab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.atab:hover{color:var(--t1)}
+.acontent{display:none;padding:14px}
+.acontent.on{display:block}
+
+.fgroup{margin-bottom:13px}
+.fgroup label{display:block;font-size:.66rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+.aprod{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);padding:11px;
+  display:flex;align-items:center;gap:11px;margin-bottom:9px;
+  transition:border-color .18s;
+}
+.aprod:hover{border-color:var(--border2)}
+.aprod-em{font-size:1.9rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.aprod-em img{width:100%;height:100%;object-fit:cover;border-radius:7px}
+.aprod-info{flex:1;min-width:0}
+.aprod-name{font-family:var(--ff-display);font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aprod-sub{font-size:.72rem;color:var(--t3);margin-top:2px}
+.aprod-acts{display:flex;gap:5px;flex-shrink:0}
+
+.order-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);padding:13px;margin-bottom:9px;
+}
+.order-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.order-id{font-size:.72rem;color:var(--t3);font-family:monospace}
+.status{
+  font-size:.67rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 8px;border-radius:5px;
+}
+.status.pending {background:rgba(212,137,74,.15);color:var(--amber)}
+.status.confirmed{background:rgba(76,175,125,.15);color:var(--green)}
+.status.cancelled{background:rgba(217,83,79,.15);color:var(--red)}
+.order-prods{font-size:.83rem;color:var(--t2);margin-bottom:7px}
+.order-date{font-size:.72rem;color:var(--t3);margin-bottom:8px}
+.order-foot{display:flex;justify-content:space-between;align-items:center}
+.order-total{font-weight:600;color:var(--gold);font-size:.92rem}
+.order-acts{display:flex;gap:5px}
+
+.log-box{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r2);padding:0 14px;max-height:420px;overflow-y:auto;
+}
+.log-row{padding:9px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.log-row:last-child{border-bottom:none}
+.log-t{font-size:.68rem;color:var(--t3);font-family:monospace;margin-bottom:1px}
+
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:14px}
+.stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:13px}
+.stat .si{font-size:1.3rem;margin-bottom:5px}
+.stat .sv{font-family:var(--ff-display);font-size:1.5rem;font-weight:700;color:var(--gold)}
+.stat .sl{font-size:.68rem;color:var(--t3);margin-top:1px}
+
+/* ── Modal ───────────────────────────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.78);
+  display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;
+  transition:opacity .24s var(--ease);
+}
+.overlay.on{opacity:1;pointer-events:all}
+.modal{
+  background:var(--bg2);
+  border-radius:var(--r3) var(--r3) 0 0;
+  border-top:1px solid var(--border);
+  width:100%;max-width:480px;margin:0 auto;
+  max-height:88vh;overflow-y:auto;
+  transform:translateY(100%);transition:transform .3s var(--ease);
+}
+.overlay.on .modal{transform:translateY(0)}
+.modal-hdr{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 18px 13px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--bg2);z-index:1;
+}
+.modal-hdr h3{font-family:var(--ff-display);font-size:1.15rem}
+.modal-close{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--bg4);color:var(--t2);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;cursor:pointer;
+}
+.modal-close:hover{background:var(--bg5);color:var(--t1)}
+.modal-body{padding:16px 18px 24px}
+
+/* ── Upload area ─────────────────────────────────────────────── */
+.upload{
+  border:2px dashed var(--border);border-radius:var(--r);
+  padding:22px;text-align:center;cursor:pointer;
+  transition:border-color .2s;
+}
+.upload:hover{border-color:var(--gold3)}
+.upload .up-ic{font-size:1.8rem;opacity:.4;margin-bottom:6px}
+.upload p{font-size:.78rem;color:var(--t3)}
+.img-prev{margin-top:9px;border-radius:var(--r);overflow:hidden;max-height:148px}
+.img-prev img{width:100%;height:100%;object-fit:cover}
+
+/* ── Login page ──────────────────────────────────────────────── */
+.login-wrap{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(ellipse at 25% 20%,rgba(200,169,110,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 75% 80%,rgba(200,169,110,.05) 0%,transparent 50%),
+    var(--bg);
+}
+.login-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--r3);padding:30px 22px;
+  width:100%;max-width:340px;
+}
+.login-logo{
+  font-family:var(--ff-display);font-size:1.9rem;font-weight:700;
+  color:var(--gold);letter-spacing:.08em;text-align:center;margin-bottom:4px;
+}
+.login-sub{text-align:center;color:var(--t3);font-size:.82rem;margin-bottom:26px}
+.login-err{
+  background:rgba(217,83,79,.1);border:1px solid rgba(217,83,79,.3);
+  border-radius:var(--r);padding:9px 13px;
+  color:var(--red);font-size:.82rem;margin-bottom:12px;display:none;
+}
+
+/* ── Access denied ───────────────────────────────────────────── */
+.denied{text-align:center;padding:64px 24px}
+.denied .lock{font-size:3.5rem;margin-bottom:14px}
+.denied h2{font-family:var(--ff-display);color:var(--t2);margin-bottom:7px}
+.denied p{color:var(--t3);font-size:.85rem}
+
+/* ── Divider ─────────────────────────────────────────────────── */
+.div{height:1px;background:var(--border);margin:14px 0}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* ── Cart bounce animation ───────────────────────────────────── */
+/* Іконка кошика підскакує при додаванні товару */
+@keyframes cartBounce{
+  0%  {transform:scale(1)    translateY(0)}
+  25% {transform:scale(1.32) translateY(-5px)}
+  50% {transform:scale(.88)  translateY(2px)}
+  70% {transform:scale(1.14) translateY(-2px)}
+  88% {transform:scale(.96)  translateY(1px)}
+  100%{transform:scale(1)    translateY(0)}
+}
+/* Золота крапля летить від кнопки до кошика */
+@keyframes flyDot{
+  0%  {opacity:1;transform:scale(1) translate(0,0)}
+  80% {opacity:1}
+  100%{opacity:0;transform:scale(.4) translate(var(--dx),var(--dy))}
+}
+/* Спалах золотого кільця навколо кошика */
+@keyframes cartRing{
+  0%  {box-shadow:0 0 0 0 rgba(200,169,110,.7);opacity:1}
+  100%{box-shadow:0 0 0 14px rgba(200,169,110,0);opacity:0}
+}
+
+.cart-chip.bouncing .ni-cart,
+.cart-chip.bouncing{animation:cartBounce .52s var(--ease)}
+
+/* Літаюча крапля */
+.fly-dot{
+  position:fixed;z-index:9999;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);
+  pointer-events:none;
+  animation:flyDot .55s var(--ease) forwards;
+  box-shadow:0 0 6px rgba(200,169,110,.6);
+}
+
+/* Кільце-спалах на кошику */
+.cart-chip.ring-flash{
+  animation:cartRing .5s ease-out forwards;
+  border-radius:var(--r);
+}
+
+.au  {animation:fadeUp .32s var(--ease) both}
+.au1 {animation:fadeUp .32s var(--ease) .07s both}
+.au2 {animation:fadeUp .32s var(--ease) .14s both}
+.au3 {animation:fadeUp .32s var(--ease) .21s both}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media(max-width:360px){
+  .grid{grid-template-columns:1fr}
+  h1{font-size:1.6rem}
+  .hero-logo{font-size:1.55rem}
+  .dfo-title{font-size:.85rem}
+}

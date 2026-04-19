@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <title>Вхід — Elegant's Store</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body{padding-bottom:0}
+  </style>
+</head>
+<body>
+
+  <div class="login-wrap">
+    <div class="login-card au">
+
+      <div class="login-logo">Elegant's</div>
+      <div class="login-sub">Адміністративний вхід</div>
+
+      <!-- Error -->
+      <div class="login-err" id="loginErr"></div>
+
+      <!-- Form -->
+      <form id="loginForm" novalidate>
+
+        <div class="fgroup">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="admin@elegants.store" autocomplete="email" required>
+        </div>
+
+        <div class="fgroup" style="position:relative">
+          <label>Пароль</label>
+          <input type="password" id="pwd" placeholder="••••••••••"
+                 autocomplete="current-password" required style="padding-right:42px">
+          <button type="button" id="togglePwd"
+                  style="position:absolute;right:10px;bottom:9px;font-size:1.05rem;color:var(--t3);padding:2px 4px;cursor:pointer">
+            👁
+          </button>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-full mt16" id="loginBtn">
+          Увійти
+        </button>
+
+      </form>
+
+      <div class="div"></div>
+
+      <p class="caption tc" style="line-height:1.55">
+        Або відкрийте магазин у <strong>Telegram</strong> —<br>
+        адміни розпізнаються автоматично за ID
+      </p>
+
+      <a href="index.html" class="caption tc" style="display:block;margin-top:14px;color:var(--t3)">
+        ← Повернутись до магазину
+      </a>
+
+    </div>
+  </div>
+
+  <script src="elegant-telegram.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

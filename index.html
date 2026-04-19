@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0b">
+  <title>Elegant's Store</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body data-page="index">
+
+  <!-- ══ HEADER ══════════════════════════════════════════════ -->
+  <header class="hdr">
+    <div class="hdr-logo">Elegant's<sup>Store</sup></div>
+    <div class="hdr-actions">
+      <a href="cart.html" class="cart-chip">
+        🛒 <span class="cnt">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ══ MAIN ════════════════════════════════════════════════ -->
+  <main class="wrap page">
+
+    <!-- [ЗМІНА 3] Hero banner замінено на логотип -->
+    <div class="hero au">
+      <div class="hero-logo">ELEGANT'S<br>STORE</div>
+      <div class="hero-tagline">Premium style for modern people</div>
+      <button class="btn btn-gold" id="heroBuy">Купити зараз →</button>
+    </div>
+
+    <!-- Quick links -->
+    <div class="ql-row au1" id="qlRow"></div>
+
+    <!-- [ЗМІНА 5] Банер "Знижка 5% на перше замовлення" -->
+    <div class="discount-first-order au1" id="discountBanner">
+      <div class="dfo-icon">🎁</div>
+      <div class="dfo-text">
+        <div class="dfo-title">Знижка 5% на перше замовлення</div>
+        <div class="dfo-sub">Тільки для нових клієнтів</div>
+      </div>
+      <button class="dfo-btn" id="discountBtn">Отримати знижку</button>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap au2">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="srch" placeholder="Пошук товарів…">
+    </div>
+
+    <!-- Category chips -->
+    <div class="chips au2" id="catChips"></div>
+
+    <!-- Price filter -->
+    <div class="price-row au2">
+      <input type="number" id="minP" placeholder="Від ₴" min="0">
+      <span class="sep">—</span>
+      <input type="number" id="maxP" placeholder="До ₴"  min="0">
+    </div>
+
+    <!-- Section header -->
+    <div class="sec-hdr">
+      <h2>Каталог</h2>
+    </div>
+
+    <!-- Product grid -->
+    <div class="grid" id="prodGrid"></div>
+
+  </main>
+
+  <!-- ══ BOTTOM NAV ══════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html"    class="nav-item" data-p="index">
+      <span class="ni">🏠</span><span>Головна</span>
+    </a>
+    <a href="cart.html"     class="nav-item" data-p="cart">
+      <span class="ni">🛒</span><span>Кошик</span>
+    </a>
+    <a href="settings.html" class="nav-item" data-p="settings">
+      <span class="ni">ℹ️</span><span>Про нас</span>
+    </a>
+  </nav>
+
+  <script src="elegant-telegram.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
